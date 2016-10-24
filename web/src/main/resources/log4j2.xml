@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <properties>
+        <property name="LOG_HOME">/data/logs/</property>
+        <property name="APP_NAME">sale-web</property>
+    </properties>
+
+    <appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p [%t] (%F:%L) - %m%n"/>
+        </Console>
+        <RollingFile name="RollingFile" fileName="${LOG_HOME}/${APP_NAME}.log"
+                     filePattern="${LOG_HOME}/${APP_NAME}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>%d %-5level [%t] %class{36}.%M:%L - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+    </appenders>
+    <Loggers>
+        <Root level="error">
+            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+</configuration>
